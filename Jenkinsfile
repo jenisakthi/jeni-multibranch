@@ -19,7 +19,7 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                withPythonEnv('python3.9'){
+                withPythonEnv('python3'){
                     sh '''
                     pip install -r requirements.txt
                     '''
@@ -29,7 +29,7 @@ pipeline {
         
         stage('Run Flask App') {
             steps {
-                withPythonEnv('python3.9'){
+                withPythonEnv('python3'){
                     // Run app.py in background on the virtual environment
                     sh 'nohup python app.py > app.log 2>&1 &'
                     // Optionally, wait for a few seconds to ensure the app has started
@@ -38,23 +38,5 @@ pipeline {
             }
         }
         
-        stage('Clean Workspace') {
-            steps {
-                script {
-                    // Clean up workspace
-                    deleteDir()
-                }
-            }
-        }
-    }
-    
-    post {
-        always {
-            // Clean up virtual environment after the pipeline finishes
-            script {
-                sh 'deactivate || :'
-                deleteDir()
-            }
-        }
     }
 }
