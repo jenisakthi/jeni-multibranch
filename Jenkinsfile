@@ -1,11 +1,10 @@
 pipeline {
     agent any
     
-    options {
-        // Define triggers here
-        triggers {
-            githubPush() // Trigger build on GitHub push events
-            // Other triggers can be added as needed, e.g., cron('H * * * *') for periodic builds
+    triggers {
+        github {
+            // GitHub webhook configuration
+            webhookEvents('push') // Trigger on push events
         }
     }
     
