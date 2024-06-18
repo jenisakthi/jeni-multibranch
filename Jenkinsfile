@@ -10,7 +10,7 @@ pipeline {
         stage('Create Virtual Environment') {
             steps {                
                     sh '''
-                    echo ${env.branch_name}
+                    echo "${env.branch_name}"
                     '''
                 
             }
