@@ -9,27 +9,29 @@ pipeline {
     stages {
         stage('Create Virtual Environment') {
             steps {
-                script {
-                    // Create a virtual environment
-                    sh 'python3 -m venv venv'
+                withPythonEnv('python3.9'){
+                    sh '''
+                    pip install --upgrade pip
+                    '''
                 }
             }
         }
         
         stage('Install Dependencies') {
             steps {
-                script {
-                    // Activate the virtual environment and install dependencies
-                    sh 'source venv/bin/activate && pip install -r requirements.txt'
+                withPythonEnv('python3.9'){
+                    sh '''
+                    pip install -r requirements.txt
+                    '''
                 }
             }
         }
         
         stage('Run Flask App') {
             steps {
-                script {
+                withPythonEnv('python3.9'){
                     // Run app.py in background on the virtual environment
-                    sh 'source venv/bin/activate && nohup python app.py > app.log 2>&1 &'
+                    sh 'nohup python app.py > app.log 2>&1 &'
                     // Optionally, wait for a few seconds to ensure the app has started
                     sleep 10
                 }
