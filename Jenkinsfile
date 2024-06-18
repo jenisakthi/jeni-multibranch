@@ -8,13 +8,11 @@ pipeline {
     
     stages {
         stage('Create Virtual Environment') {
-            steps {
-                withPythonEnv('python3.9'){
+            steps {                
                     sh '''
-                    pip install --upgrade pip
                     echo "env.branch_name"
                     '''
-                }
+                
             }
         }
         
