@@ -5,12 +5,14 @@ properties([
 
 pipeline {
     agent any
-    
+    environment {
+        BRANCH = "${env.BRANCH_NAME}"
+    }
     stages {
         stage('Create Virtual Environment') {
             steps {                
                     sh '''
-                    echo "${env.BRANCH_NAME}"
+                    echo $BRANCH
                     '''
                 
             }
