@@ -12,6 +12,7 @@ pipeline {
                 withPythonEnv('python3.9'){
                     sh '''
                     pip install --upgrade pip
+                    echo "env.branch_name"
                     '''
                 }
             }
