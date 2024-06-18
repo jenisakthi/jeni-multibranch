@@ -1,12 +1,10 @@
+properties([
+    pipelineTriggers([[$class: 'GitHubPushTrigger']])
+])
+
+
 pipeline {
     agent any
-    
-    triggers {
-        github {
-            // GitHub webhook configuration
-            webhookEvents('push') // Trigger on push events
-        }
-    }
     
     stages {
         stage('Create Virtual Environment') {
